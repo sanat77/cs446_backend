@@ -63,6 +63,9 @@ export class DoctorService {
             },
             {
                 $unset: ['bookings', 'nextAvailableSlot1']
+            },
+            { 
+                $sort: { rating: -1 } 
             }
         ]);
         if (!doctors) {
@@ -142,27 +145,44 @@ export class DoctorService {
     
 
     public async getDoctorsWithFilters(
-        doctorName: string,
-        curLat: string,
-        curLong: string,
-        maxDistance: string,
-        speciality: string,
-        minRating: string,
-        insuranceProvider: string,
-        startDate: string,
-        endDate: string
+        doctorName?: string,
+        curLat?: number,
+        curLong?: number,
+        maxDistance?: number,
+        speciality?: string,
+        minRating?: number,
+        insuranceProvider?: string,
+        startDate?: string,
+        endDate?: string
     ) {
-        const startTimestamp = new Date(startDate).getTime();
-        const endTimestamp = new Date(endDate).getTime();
-        const doctorsWithoutDistanceFilters = await Doctor.aggregate([
-            {
-                $match: {
-                    name: { $regex: doctorName, $options: 'i' },
-                    specialty: speciality,
-                    rating: { $gte: Number(minRating) },
-                    insuranceProviders: insuranceProvider
-                }
-            },
+        const matchQuery: any = {};
+    
+        if (doctorName) {
+            matchQuery.name = { $regex: doctorName, $options: 'i' };
+        }
+        if (speciality) {
+            matchQuery.specialty = speciality;
+        }
+        if (minRating !== undefined) {
+            matchQuery.rating = { $gte: minRating };
+        }
+        if (insuranceProvider) {
+            matchQuery.insuranceProviders = insuranceProvider;
+        }
+    
+        let dateFilter: any = {};
+        if (startDate) {
+            const startTimestamp = new Date(startDate).getTime();
+            dateFilter['bookings.startTimeTimestamp'] = { $gte: startTimestamp };
+        }
+        if (endDate) {
+            const endTimestamp = new Date(endDate).getTime();
+            dateFilter['bookings.startTimeTimestamp'] = dateFilter['bookings.startTimeTimestamp'] || {};
+            dateFilter['bookings.startTimeTimestamp'].$lte = endTimestamp;
+        }
+    
+        const aggregationPipeline: any[] = [
+            { $match: matchQuery },
             {
                 $lookup: {
                     from: 'bookings',
@@ -182,11 +202,13 @@ export class DoctorService {
                     }
                 },
             },
-            {
-                $match: {
-                    'bookings.startTimeTimestamp': { $gte: startTimestamp, $lte: endTimestamp }
-                }
-            },
+        ];
+    
+        if (Object.keys(dateFilter).length > 0) {
+            aggregationPipeline.push({ $match: dateFilter });
+        }
+    
+        aggregationPipeline.push(
             {
                 $addFields: {
                     'nextAvailableSlot1': {
@@ -227,29 +249,37 @@ export class DoctorService {
                     doc: { $first: '$$ROOT' }
                 }
             },
-            {
-                $replaceRoot: { newRoot: '$doc' }
-            },
-            {
-                $unset: ['bookings', 'nextAvailableSlot1']
-            }
-        ]);
+            { $replaceRoot: { newRoot: '$doc' } },
+            { $unset: ['bookings', 'nextAvailableSlot1'] },
+            { $sort: { rating: -1 } }
+        );
+    
+        const doctorsWithoutDistanceFilters = await Doctor.aggregate(aggregationPipeline);
+    
         if (!doctorsWithoutDistanceFilters) {
             return [];
         }
-        const doctorsWithDistanceFilters = doctorsWithoutDistanceFilters.filter(
-            (doctor) => {
-                const distance = DistanceBetweenTwoCoordinatesOnEarth(
-                    parseFloat(curLat),
-                    parseFloat(curLong),
-                    doctor.latitude,
-                    doctor.longitude
-                );
-                return distance <= parseFloat(maxDistance);
-            }
-        );
-        return doctorsWithDistanceFilters;
-    }    
+    
+        if (curLat !== undefined && curLong !== undefined && maxDistance !== undefined) {
+            const doctorsWithDistanceFilters = doctorsWithoutDistanceFilters.filter(
+                (doctor) => {
+                    const distance = DistanceBetweenTwoCoordinatesOnEarth(
+                        curLat,
+                        curLong,
+                        doctor.latitude,
+                        doctor.longitude
+                    );
+                    return distance <= maxDistance;
+                }
+            );
+            return doctorsWithDistanceFilters;
+        }
+    
+        return doctorsWithoutDistanceFilters;
+    }
+    
+    
+       
 
     public async updateDoctorById(
         id: String,

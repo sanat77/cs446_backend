@@ -30,12 +30,9 @@ router.get('/all-doctors', (req, res) => {
 router.get('/one-doctor/:id', (req, res) => {
     doctorController.GetDoctorById(req, res);
 });
-router.get(
-    '/filter-doctors/:doctorName/:curLat/:curLong/:maxDistance/:speciality/:minRating/:insuranceProvider/:startDate/:endDate',
-    (req, res) => {
-        doctorController.GetDoctorsWithFilters(req, res);
-    }
-);
+router.get('/filter-doctors', (req, res) => {
+    doctorController.GetDoctorsWithFilters(req, res);
+});
 router.put('/update-doctor/:id', (req, res) => {
     doctorController.UpdateDoctor(req, res);
 });

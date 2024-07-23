@@ -50,21 +50,9 @@ export class DoctorController {
         }
     }
 
-    public async GetDoctorsWithFilters(
-        req: Request,
-        res: Response
-    ): Promise<void> {
+    public async GetDoctorsWithFilters(req: Request, res: Response): Promise<void> {
         try {
-            const doctorName: string = req.params.doctorName;
-            const curLat: string = req.params.curLat;
-            const curLong: string = req.params.curLong;
-            const maxDistance: string = req.params.maxDistance;
-            const speciality: string = req.params.speciality;
-            const minRating: string = req.params.minRating;
-            const insuranceProvider: string = req.params.insuranceProvider;
-            const startDate: string = req.params.startDate;
-            const endDate: string = req.params.endDate;
-            const doctors = await this.doctorService.getDoctorsWithFilters(
+            const {
                 doctorName,
                 curLat,
                 curLong,
@@ -74,8 +62,32 @@ export class DoctorController {
                 insuranceProvider,
                 startDate,
                 endDate
+            } = req.query;
+    
+            // Type guard to ensure the values are strings
+            const parsedDoctorName = typeof doctorName === 'string' ? doctorName : undefined;
+            const parsedCurLat = typeof curLat === 'string' ? parseFloat(curLat) : undefined;
+            const parsedCurLong = typeof curLong === 'string' ? parseFloat(curLong) : undefined;
+            const parsedMaxDistance = typeof maxDistance === 'string' ? parseFloat(maxDistance) : undefined;
+            const parsedSpeciality = typeof speciality === 'string' ? speciality : undefined;
+            const parsedMinRating = typeof minRating === 'string' ? Number(minRating) : undefined;
+            const parsedInsuranceProvider = typeof insuranceProvider === 'string' ? insuranceProvider : undefined;
+            const parsedStartDate = typeof startDate === 'string' ? startDate : undefined;
+            const parsedEndDate = typeof endDate === 'string' ? endDate : undefined;
+    
+            const doctors = await this.doctorService.getDoctorsWithFilters(
+                parsedDoctorName,
+                parsedCurLat,
+                parsedCurLong,
+                parsedMaxDistance,
+                parsedSpeciality,
+                parsedMinRating,
+                parsedInsuranceProvider,
+                parsedStartDate,
+                parsedEndDate
             );
-            if (doctors) {
+    
+            if (doctors.length > 0) {
                 res.status(200).json(doctors);
             } else {
                 res.status(404).json({ message: 'No doctor found!' });
