@@ -1,0 +1,795 @@
+{
+	"info": {
+		"_postman_id": "18ceecb1-9b4e-4009-a1fa-d78fa9b6523a",
+		"name": "DoctorDirect",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Doctor",
+			"item": [
+				{
+					"name": "Get All Doctors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/all-doctors",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"all-doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Doctor",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/one-doctor/8dcb00c6-a4bb-4510-8315-40b119e5784a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"one-doctor",
+								"8dcb00c6-a4bb-4510-8315-40b119e5784a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Doctors with Filter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/filter-doctors/Dr/43.4729/-80.5426/200000000/Fireworks Safety/2/Manulife/Fri Jun 17 2022 11:27:28 GMT+0100 (British Summer Time)/Thu Jul 18 2024 17:43:25 GMT-0400 (Eastern Daylight Time)",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"filter-doctors",
+								"Dr",
+								"43.4729",
+								"-80.5426",
+								"200000000",
+								"Fireworks Safety",
+								"2",
+								"Manulife",
+								"Fri Jun 17 2022 11:27:28 GMT+0100 (British Summer Time)",
+								"Thu Jul 18 2024 17:43:25 GMT-0400 (Eastern Daylight Time)"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Upload New Doctor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"5854f5e5-5c49-485b-9973-d49e3ded807a\",\n    \"profileImage\": \"https://randomuser.me/api/portraits/women/5.jpg\",\n    \"name\": \"Dr. Whiz Bang\",\n    \"practiceName\": \"Meshram Clinic\",\n    \"phoneNumber\": 1234567890,\n    \"specialty\": \"Fireworks Safety\",\n    \"latitude\": 43.4729,\n    \"longitude\": -80.5426,\n    \"address\": \"321 Spark St, Kitchener, ON\",\n    \"rating\": 2.6,\n    \"insuranceProviders\": [\"Manulife\", \"Sunlife\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/create-doctor",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"create-doctor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Doctor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"5854f5e5-5c49-485b-9973-d49e3ded809a\",\n    \"profileImage\": \"https://randomuser.me/api/portraits/women/5.jpg\",\n    \"name\": \"Dr. Name Changed\",\n    \"practiceName\": \"Meshram Clinic\",\n    \"phoneNumber\": 1357924680,\n    \"specialty\": \"Fireworks Safety\",\n    \"latitude\": 43.4729,\n    \"longitude\": -80.5426,\n    \"address\": \"321 Spark St, Kitchener, ON\",\n    \"rating\": 2.6,\n    \"insuranceProviders\": [\"Manulife\", \"Sunlife\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/update-doctor/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"update-doctor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Doctor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/delete-doctor/5854f5e5-5c49-485b-9973-d49e3ded809a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"delete-doctor",
+								"5854f5e5-5c49-485b-9973-d49e3ded809a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create New User (Sign Up)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"b49aa381-f0c3-49bf-8619-06c6d4fd5676\",\n    \"role\": \"DOCTOR\",\n    \"username\": \"sbhalla@gmail.com\",\n    \"password\": \"password@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/create-user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"create-user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User (Login)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/get-user/sbhalla@gmail.com/password@123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get-user",
+								"sbhalla@gmail.com",
+								"password@123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"oldUsername\": \"sbhalla@gmail.co\",\n    \"newUser\": {\n        \"_id\": \"b49aa381-f0c3-49bf-8619-06c6d4fd5676\",\n        \"role\": \"DOCTOR\",\n        \"username\": \"sbhalla@gmail.com\",\n        \"password\": \"password@123\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/update-user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"update-user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "Create booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"825e86b7-6d07-4065-81e8-a1fe717b716a\",\n    \"doctorId\": \"5854f5e5-5c49-485b-9973-d49e3ded807a\",\n    \"startTime\": \"2024=03-01\",\n    \"duration\": 4.6,\n    \"status\": \"AVAILABLE\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/create-booking",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"create-booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete booking",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/api/delete-booking/825e86b7-6d07-4065-81e8-a1fe717b712b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"delete-booking",
+								"825e86b7-6d07-4065-81e8-a1fe717b712b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set booking as booked",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/set-booking-as-booked/825e86b7-6d07-4065-81e8-a1fe717b712b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"set-booking-as-booked",
+								"825e86b7-6d07-4065-81e8-a1fe717b712b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/get-bookings-byId/825e86b7-6d07-4065-81e8-a1fe717b716a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get-bookings-byId",
+								"825e86b7-6d07-4065-81e8-a1fe717b716a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getByDoctorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/get-bookings-by-doctorId/5854f5e5-5c49-485b-9973-d49e3ded807a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get-bookings-by-doctorId",
+								"5854f5e5-5c49-485b-9973-d49e3ded807a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointments",
+			"item": [
+				{
+					"name": "Create Appointment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"825e86b7-6d07-4065-81e8-a1fe717b712c\",\n    \"bookingId\": \"825e86b7-6d07-4065-81e8-a1fe717b716a\",\n    \"patientId\": \"b49aa381-f0c3-49bf-8619-06c6d4fd5676\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/create-appointment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"create-appointment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete appointment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/delete-appointment/825e86b7-6d07-4065-81e8-a1fe717b712b",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"delete-appointment",
+								"825e86b7-6d07-4065-81e8-a1fe717b712b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get appointments for a patient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/get-appointments-by-patientId/b49aa381-f0c3-49bf-8619-06c6d4fd5676",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get-appointments-by-patientId",
+								"b49aa381-f0c3-49bf-8619-06c6d4fd5676"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by doctor id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/get-appointments-by-doctorId/5854f5e5-5c49-485b-9973-d49e3ded807a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get-appointments-by-doctorId",
+								"5854f5e5-5c49-485b-9973-d49e3ded807a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/get-appointment-byId/825e86b7-6d07-4065-81e8-a1fe717b712c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"get-appointment-byId",
+								"825e86b7-6d07-4065-81e8-a1fe717b712c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patient",
+			"item": [
+				{
+					"name": "Create New Patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"4ca47b5a-5977-45cd-9589-c12a554e08d9\",\n    \"name\": \"Patient 2\",\n    \"phoneNumber\": 1234567891,\n    \"isActive\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/create-patient",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"create-patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Patients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/all-patients",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"all-patients"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get One Patient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/one-patient/4527f142-682a-4e7b-a817-4ce9f0f68c40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"one-patient",
+								"4527f142-682a-4e7b-a817-4ce9f0f68c40"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Patient",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"4527f142-682a-4e7b-a817-4ce9f0f68c40\",\n    \"name\": \"Patient 1\",\n    \"phoneNumber\": 9456544635,\n    \"isActive\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/update-patient/4527f142-682a-4e7b-a817-4ce9f0f68c40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"update-patient",
+								"4527f142-682a-4e7b-a817-4ce9f0f68c40"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Patient",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/delete-patient/4527f142-682a-4e7b-a817-4ce9f0f68c40",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"delete-patient",
+								"4527f142-682a-4e7b-a817-4ce9f0f68c40"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Review",
+			"item": [
+				{
+					"name": "Create Review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"701718c0-4cee-4b65-9ee1-cc77b0654f65\",\n    \"patientId\": \"4ca47b5a-5977-45cd-9589-c12a554e08d9\",\n    \"doctorId\": \"96ec8476-6804-4dc0-9731-ef9f3b523063\",\n    \"reviewerName\": \"Patient 2\",\n    \"isAnonymous\": false,\n    \"rating\": 4,\n    \"reviewText\": \"This is a sample review 2\",\n    \"date\": \"Thu Jul 18 2024 17:08:48 GMT-0400 (Eastern Daylight Time)\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/create-review",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"create-review"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Reviews By Doctor ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/doctor-reviews/96ec8476-6804-4dc0-9731-ef9f3b523063",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"doctor-reviews",
+								"96ec8476-6804-4dc0-9731-ef9f3b523063"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Reviews By Patient ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/patient-reviews/4ca47b5a-5977-45cd-9589-c12a554e08d9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"patient-reviews",
+								"4ca47b5a-5977-45cd-9589-c12a554e08d9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Reviews",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/all-reviews",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"all-reviews"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Review",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_id\": \"701718c0-4cee-4b65-9ee1-cc77b0654f65\",\n    \"patientId\": \"4ca47b5a-5977-45cd-9589-c12a554e08d9\",\n    \"doctorId\": \"96ec8476-6804-4dc0-9731-ef9f3b523063\",\n    \"reviewerName\": \"Patient 2\",\n    \"isAnonymous\": false,\n    \"rating\": 4,\n    \"reviewText\": \"Updated Review 2\",\n    \"date\": \"Thu Jul 18 2024 17:08:48 GMT-0400 (Eastern Daylight Time)\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/update-review/701718c0-4cee-4b65-9ee1-cc77b0654f65",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"update-review",
+								"701718c0-4cee-4b65-9ee1-cc77b0654f65"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Review",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/delete-review/701718c0-4cee-4b65-9ee1-cc77b0654f65",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"delete-review",
+								"701718c0-4cee-4b65-9ee1-cc77b0654f65"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sample API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
